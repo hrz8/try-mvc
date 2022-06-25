@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../_partials/bootstrap/style'); %>
+
+  <title>List Articles</title>
+</head>
+<body>
+  <%- include('../_partials/navbar'); %> 
+
+  <h1>List Articles</h1>
+
+  <a href="/articles/create">Create</a>
+
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Action</th>
+    </tr>
+    <!-- <% for (const article of articles) { %>
+      <tr>
+        <td><%= article.id %></td>
+        <td><%= article.title %></td>
+        <td><a href=<%= `/articles/${article.id}` %>>Details</a>|Delete</td>
+      </tr>
+    <% } %> -->
+    <% for (let i = 0; i < articles.length; i++) { %>
+      <% if (i % 2 === 0) { %>
+      <tr style="color: green ">
+      <% }else{ %> 
+      <tr style="color: red ">
+      <% } %>
+        <td><%= articles[i].id %></td>
+        <td><%= articles[i].title %></td>
+        <td><a href=<%= `/articles/${articles[i].id}` %>>Details</a>|Delete</td>
+      </tr>
+    <% } %>
+    <!-- <% articles.forEach(article => { %>
+      <tr>
+        <td><%= article.id %></td>
+        <td><%= article.title %></td>
+        <td><a href=<%= `/articles/${article.id}` %>>Details</a>|Delete</td>
+      </tr>
+    <% }) %> -->
+  </table>
+
+  <%- include('../_partials/bootstrap/script'); %>
+
+  <!-- <div id="hasil-ajax"></div> -->
+</body>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+<script>
+  // fetch("http://localhost:3000/articles/api")
+  //   .then((r) => r.json())
+  //   .then((result) => {
+  //     console.log(result);
+  //     document.getElementById('hasil-ajax').append(JSON.stringify(result));
+  //   });
+</script>
+</html>

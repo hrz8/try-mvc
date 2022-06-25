@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../_partials/bootstrap/style'); %>
+
+  <title>Login</title>
+</head>
+<body>
+  <!-- <% if (error_message) { %>
+    <p><%= error_message %> </p>
+  <% } %> controller -->
+  <% if (messages.error) { %>
+    <p><%= messages.error %> </p>
+  <% } %>
+
+  <%- include('../_partials/navbar'); %> 
+
+  <h1>Login</h1>
+
+  <form action="/users/process-login" method="post">
+    <input type="text" name="username" placeholder="Username">
+    <input type="password" name="password" placeholder="Password">
+    
+    <%- include('../_partials/button', { label: 'Login' })  %> 
+  </form>
+</body>
+</html>

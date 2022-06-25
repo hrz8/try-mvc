@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <title>Create Categories</title>
+</head>
+<body>
+  <h1>Create Categories</h1>
+
+  <a href="/articles">Back to Articles</a>
+
+  <form action="/categories/process-create" method="post">
+    <input type="text" name="name" placeholder="Name">
+    <button type="submit">Create</button>
+  </form>
+
+  <%- include('../_partials/bootstrap/script'); %>
+</body>
+</html>

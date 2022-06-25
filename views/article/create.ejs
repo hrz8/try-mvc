@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../_partials/bootstrap/style'); %>
+
+  <title>Create Article</title>
+</head>
+<body>
+  <%- include('../_partials/navbar'); %> 
+
+  <h1>Create Article</h1>
+
+  <a href="/articles">List</a>
+
+  <!-- <form action="/articles/process-create" method="post"> -->
+    <input type="text" name="title" placeholder="Title">
+    <input type="text" name="content" placeholder="Content">
+    <select name="category_id" id="category_id">
+      <% categories.forEach(cat => { %>
+        <option value="<%= cat.id %>"><%= cat.name %></option>
+      <% }) %>
+    </select>
+    
+    <%- include('../_partials/button', { label: 'Create' })  %> 
+  <!-- </form> -->
+  <br>
+
+  <a href="/categories/create">+ Add Categories</a>
+
+  <%- include('../_partials/bootstrap/script'); %>
+</body>
+
+<script>
+  document.getElementById('buttonnya').onclick(() => {
+    $.ajax({
+    url: "http://localhost:3000/articles/process-create",
+    method: "POST",
+    success: function(result) {
+      console.log(result);
+      document.getElementById('hasil-ajax').append(JSON.stringify(result));
+    }
+  });
+  })
+</script>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../_partials/bootstrap/style'); %>
+
+  <title>Details Article <%= article.id %></title>
+</head>
+<body>
+  <h1>Details Article <%= article.id %></h1>
+  
+  <a href="/articles">List</a>
+
+  <form action="/articles/process-update/<%= article.id %>" method="post">
+    <input type="text" name="title" value="<%= article.title %>">
+    <input type="text" name="content" value="<%= article.content %>">
+    <select name="category_id" id="category_id">
+      <% categories.forEach(cat => { %>
+        <option value="<%= cat.id %>" <%= article.category_id === cat.id ? 'selected' : '' %>><%= cat.name %></option>
+      <% }) %>
+    </select>
+
+    <%- include('../_partials/button', { label: 'Edit' })  %> 
+  </form>
+
+  <br>
+
+  <a href="/categories/create">+ Add Categories</a>
+
+  <%- include('../_partials/bootstrap/script'); %>
+</body>
+</html>
