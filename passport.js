@@ -1,4 +1,4 @@
-const { User } = require('./models');
+const { User, Role } = require('./models');
 
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -26,7 +26,14 @@ passport.serializeUser(
 );
 
 passport.deserializeUser(
-  async (id, done) => done(null, await User.findByPk(id))
+  async (id, done) => done(null, await User.findByPk(id, {
+    include: [
+      {
+        model: Role,
+        as: 'roles'
+      }
+    ],
+  }))
 );
 
 module.exports = passport;

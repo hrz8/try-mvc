@@ -12,7 +12,7 @@
 
   <a href="/articles">List</a>
 
-  <!-- <form action="/articles/process-create" method="post"> -->
+  <form action="/articles/process-create" method="post">
     <input type="text" name="title" placeholder="Title">
     <input type="text" name="content" placeholder="Content">
     <select name="category_id" id="category_id">
@@ -22,7 +22,7 @@
     </select>
     
     <%- include('../_partials/button', { label: 'Create' })  %> 
-  <!-- </form> -->
+  </form>
   <br>
 
   <a href="/categories/create">+ Add Categories</a>
@@ -30,16 +30,4 @@
   <%- include('../_partials/bootstrap/script'); %>
 </body>
 
-<script>
-  document.getElementById('buttonnya').onclick(() => {
-    $.ajax({
-    url: "http://localhost:3000/articles/process-create",
-    method: "POST",
-    success: function(result) {
-      console.log(result);
-      document.getElementById('hasil-ajax').append(JSON.stringify(result));
-    }
-  });
-  })
-</script>
 </html>
