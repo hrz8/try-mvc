@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const userRepository = require('../../repositories/user.repository');
 
 module.exports = {
@@ -11,16 +12,22 @@ module.exports = {
     res.redirect('login')
   },
 
-  // login: async (req, res) => {
-  //   const username = req.body.username;
-  //   const plainPassword = req.body.password;
+  login: async (req, res) => {
+    const username = req.body.username;
+    const plainPassword = req.body.password;
 
-  //   try {
-  //     await userRepository.login({username, password: plainPassword});
-  //   } catch (error) {
-  //     res.render('user/login', {error_message: error.message});
-  //   }
+    try {
+      const user = await userRepository.login({username, password: plainPassword});
 
-  //   res.redirect('/articles');
-  // }
+      const token = jwt.sign({
+        id: user.id,
+        username: user.username,
+        roles: user.roles.map((role) => role.name)
+      }, process.env.SECRET_KEY);
+
+      res.json({userId: user.id, token})
+    } catch (error) {
+      res.status(500).json({error: error.message});
+    }
+  }
 }

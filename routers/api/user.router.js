@@ -12,4 +12,6 @@ router.post('/login', passport.authenticate('local', {
   failureFlash: true
 }));
 
+router.post('/login-jwt', userApiController.login);
+
 module.exports = router;

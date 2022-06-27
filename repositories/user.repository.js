@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 
-const { User } = require('../models')
+const { User, Role } = require('../models')
 
 module.exports = {
   encrypt: function (plainPassword) {
@@ -28,7 +28,11 @@ module.exports = {
   },
 
   get: async function (username) {
-    return User.findOne({where: {username}});
+    return User.findOne({
+      where: {username},
+      include: [{model: Role, as: 'roles'}],
+      // raw: true
+    });
   },
 
   register: async function ({ username, password }) {

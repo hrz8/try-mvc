@@ -19,5 +19,13 @@ module.exports = {
     } catch (err) {
       res.json(err);
     }
+  },
+  listing: async (req, res) => {
+    try {
+      const articles = await articleRepository.getAll();
+      res.json({ result: articles });
+    } catch (err) {
+      res.json(err);
+    }
   }
 }
