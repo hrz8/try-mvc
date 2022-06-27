@@ -10,7 +10,7 @@
   
   <a href="/articles">List</a>
 
-  <form action="/articles/process-update/<%= article.id %>" method="post">
+  <form action="/api/articles/update/<%= article.id %>" method="post">
     <input type="text" name="title" value="<%= article.title %>">
     <input type="text" name="content" value="<%= article.content %>">
     <select name="category_id" id="category_id">

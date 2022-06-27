@@ -1,9 +1,12 @@
 const {authenticate} = require('./middlewares');
 
 module.exports = (app) => {
-  app.use('/articles', authenticate, require('./article.router'));
+  app.use('/articles', authenticate, require('./web/article.router'));
+  app.use('/api/articles', authenticate, require('./api/article.router'));
 
-  app.use('/categories', authenticate, require('./category.router'));
+  app.use('/categories', authenticate, require('./web/category.router'));
+  app.use('/api/categories', authenticate, require('./api/category.router'));
 
-  app.use('/users', require('./user.router'));
+  app.use('/users', require('./web/user.router'));
+  app.use('/api/users', require('./api/user.router'));
 };

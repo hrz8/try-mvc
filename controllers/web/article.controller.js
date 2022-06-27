@@ -1,5 +1,5 @@
-const articleRepository = require("../repositories/article.repository");
-const categoryRepository = require("../repositories/category.repository");
+const articleRepository = require("../../repositories/article.repository");
+const categoryRepository = require("../../repositories/category.repository");
 
 module.exports = {
   // listJSON: async (req, res) => {

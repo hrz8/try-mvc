@@ -1,4 +1,4 @@
-const { Category } = require('../models');
+const { Category } = require('../../models');
 
 module.exports = {
   processCreate: async (req, res) => {

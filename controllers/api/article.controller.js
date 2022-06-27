@@ -1,5 +1,5 @@
-const { Article } = require('../models');
-const articleRepository = require('../repositories/article.repository');
+const { Article } = require('../../models');
+const articleRepository = require('../../repositories/article.repository');
 
 module.exports = {
   processCreate: async (req, res) => {
