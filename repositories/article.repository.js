@@ -1,8 +1,20 @@
-const { Article } = require('../models')
+const { Article, Category } = require('../models')
 
 module.exports = {
   getAll: async function () {
-    return await Article.findAll();
+    try {
+      return await Article.findAll({
+        include: [
+          {
+            model: Category,
+            association: 'category',
+            as: 'category',
+          }
+        ]
+      });
+    } catch (error) {
+      console.error(error);
+    }
   },
 
   // getUnpublished: async function () {
