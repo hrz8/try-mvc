@@ -2,16 +2,6 @@ const articleRepository = require("../../repositories/article.repository");
 const categoryRepository = require("../../repositories/category.repository");
 
 module.exports = {
-  // listJSON: async (req, res) => {
-  //   try {
-  //     // const resposne = await axios.get('url//ww..jsonplaceholder')
-  //     const articles = await articleRepository.getAll();
-  //     res.json(articles);
-  //   } catch (err) {
-  //     res.json(err);
-  //   }
-  // },
-
   list: async (req, res) => {
     try {
       const articles = await articleRepository.getAll();

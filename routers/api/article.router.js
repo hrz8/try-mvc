@@ -8,14 +8,16 @@ router.get('/', jwtAuthentication, authorization('Admin'), articleApiController.
 
 router.post(
   '/',
+  jwtAuthentication,
   authorization('User'),
-  articleApiController.processCreate
+  articleApiController.create
 );
 
-router.post(
+router.put(
   '/update/:id',
+  jwtAuthentication,
   authorization('Admin'),
-  articleApiController.processUpdate
+  articleApiController.update
 );
 
 module.exports = router;

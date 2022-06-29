@@ -12,9 +12,9 @@
 
   <a href="/articles">List</a>
 
-  <form action="/api/articles" method="post">
-    <input type="text" name="title" placeholder="Title">
-    <input type="text" name="content" placeholder="Content">
+  <form id="createArticle">
+    <input id="title" type="text" name="title" placeholder="Title">
+    <input id="content" type="text" name="content" placeholder="Content">
     <select name="category_id" id="category_id">
       <% categories.forEach(cat => { %>
         <option value="<%= cat.id %>"><%= cat.name %></option>
@@ -27,7 +27,29 @@
 
   <a href="/categories/create">+ Add Categories</a>
 
-  <%- include('../_partials/bootstrap/script'); %>
+  <!-- <%- include('../_partials/bootstrap/script'); %> -->
+
 </body>
 
 </html>
+
+<script>
+  const form = document.getElementById('createArticle');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    fetch('http://localhost:3000/api/articles', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify({
+        title: document.getElementById('title').value,
+        content: document.getElementById('content').value,
+        category_id: Number(document.getElementById('category_id').value)
+      })
+    }).then(() => location.href = 'http://localhost:3000/articles');
+  })
+</script>

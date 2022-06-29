@@ -26,7 +26,7 @@ module.exports = {
         // jti: 
         // exp: Date.now() + 8.64e+7,
         // roles: user.roles.map((role) => role.name)
-      }, process.env.SECRET_KEY, { expiresIn: '2m' });
+      }, process.env.SECRET_KEY, { expiresIn: '24h' });
 
       res.json({userId: user.id, token})
     } catch (error) {

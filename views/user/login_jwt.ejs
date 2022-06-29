@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../_partials/bootstrap/style'); %>
+
+  <title>Login</title>
+</head>
+<body>
+  <%- include('../_partials/navbar'); %> 
+
+  <h1>Login</h1>
+
+  <form id="formLogin">
+    <input id="username" type="text" name="username" placeholder="Username">
+    <input id="password" type="password" name="password" placeholder="Password">
+    
+    <%- include('../_partials/button', { label: 'Login' })  %> 
+  </form>
+</body>
+</html>
+<script>
+  const form = document.getElementById('formLogin');
+  
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    fetch('http://localhost:3000/api/users/login-jwt', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value
+      })
+    })
+    .then((res) => res.json())
+    .then((res) => localStorage.setItem('token', res.token))
+    .then(() => location.href = 'http://localhost:3000/articles');
+  })
+</script>

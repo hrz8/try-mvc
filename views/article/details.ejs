@@ -10,9 +10,11 @@
   
   <a href="/articles">List</a>
 
-  <form action="/api/articles/update/<%= article.id %>" method="post">
-    <input type="text" name="title" value="<%= article.title %>">
-    <input type="text" name="content" value="<%= article.content %>">
+  <input id="idArticle" type="hidden" value="<%= article.id  %> ">
+
+  <form id="updateForm">
+    <input id="title" type="text" name="title" value="<%= article.title %>">
+    <input id="content" type="text" name="content" value="<%= article.content %>">
     <select name="category_id" id="category_id">
       <% categories.forEach(cat => { %>
         <option value="<%= cat.id %>" <%= article.category_id === cat.id ? 'selected' : '' %>><%= cat.name %></option>
@@ -29,3 +31,24 @@
   <%- include('../_partials/bootstrap/script'); %>
 </body>
 </html>
+
+<script>
+  const form = document.getElementById('updateForm');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    fetch(`http://localhost:3000/api/articles/update/${document.getElementById('idArticle').value}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify({
+        title: document.getElementById('title').value,
+        content: document.getElementById('content').value,
+        category_id: Number(document.getElementById('category_id').value)
+      })
+    }).then(() => location.href = 'http://localhost:3000/articles');
+  })
+</script>
