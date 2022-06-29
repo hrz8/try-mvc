@@ -22,6 +22,14 @@ module.exports = {
   },
   listing: async (req, res) => {
     try {
+      // req.apa = 'foo';
+      // if (req.user !== undefined) {
+      //   console.info('authenticated');
+      // } else {
+      //   console.info('');
+      // }
+      // const user = req.user;
+      // const isAuthenticated = req.isAuthenticated();
       const articles = await articleRepository.getAll();
       res.json({ result: articles });
     } catch (err) {

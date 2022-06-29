@@ -20,10 +20,13 @@ module.exports = {
       const user = await userRepository.login({username, password: plainPassword});
 
       const token = jwt.sign({
-        id: user.id,
-        username: user.username,
-        roles: user.roles.map((role) => role.name)
-      }, process.env.SECRET_KEY);
+        sub: user.id.toString(),
+        iss: 'binar.academy.com',
+        aud: 'clientbinar',
+        // jti: 
+        // exp: Date.now() + 8.64e+7,
+        // roles: user.roles.map((role) => role.name)
+      }, process.env.SECRET_KEY, { expiresIn: '2m' });
 
       res.json({userId: user.id, token})
     } catch (error) {
