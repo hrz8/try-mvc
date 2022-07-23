@@ -3,60 +3,51 @@ import { categories } from "../constants/categories";
 import InputCategory from "../components/InputCategory";
 import InputTitle from "../components/InputTitle";
 import ListArticle from "../components/ListArticle";
+import { useState } from "react";
 
-class SearchArticle extends React.Component {
-  constructor(props) {
-    super(props);
+function SearchArticle() {
+  const [title, setTitle] = useState('');
+  const [category_id, setCategoryId] = useState('0');
+  const [showResult, setShowResult] = useState(false);
 
-    this.state = {
-      title: '',
-      category_id: '0',
-      showResult: false,
-    };
-
-    this.onChangeInput = this.onChangeInput.bind(this);
-  }
-
-  onChangeInput(event, stateName) {
-    this.setState({
-      [stateName]: event.target.value
-    })
-  }
-
-  render() {
-    return (
-      <>
-        <h1>Search Article</h1>
-        <div className="container mt-5">
-          <div className="row g-3">
-            <div className="col-6">
-              <InputTitle value={this.state.title} onChange={(event) => this.onChangeInput(event, "title")} />
-            </div>
-            <div className="col-4">
-              <InputCategory value={this.state.category_id} onChange={(event) => this.onChangeInput(event, "category_id")} />
-            </div>
-            <div className="col-2">
-              <div className="pt-4">
-                <button type="submit" className="btn btn-outline-dark" onClick={() => {
-                  if (this.state.title && this.state.category_id) {
-                    this.setState({showResult: true})
-                  }
-                }}>Search</button>
-              </div>
+  return (
+    <>
+      <h1>Search Article</h1>
+      <div className="container mt-5">
+        <div className="row g-3">
+          <div className="col-6">
+            <InputTitle value={title} onChange={(event) => {
+              setTitle(event.target.value);
+            }} />
+          </div>
+          <div className="col-4">
+            <InputCategory value={category_id} onChange={(event) => {
+              setCategoryId(event.target.value);
+            }} />
+          </div>
+          <div className="col-2">
+            <div className="pt-4">
+              <button type="submit" className="btn btn-outline-dark" onClick={() => {
+                if (title && category_id) {
+                  setShowResult(true);
+                }
+              }}>Search</button>
             </div>
           </div>
-
-          {
-            this.state.showResult && this.state.title !== "aneh" ? 
-              <div>
-                <p>you are searching for <strong>{this.state.title}</strong> with category <strong>{categories[Number(this.state.category_id)]}</strong></p>
-                <ListArticle onClick={(event) => event.preventDefault()} />
-              </div> : this.state.showResult && this.state.title === "aneh" && <div className="mt-5"><h1>Not found</h1></div>
-          }
         </div>
-      </>
-    )
-  }
+
+        {
+          showResult && title !== "aneh" ? 
+            <div>
+              <p>
+                you are searching for <strong>{title}</strong> with category <strong>{categories[Number(category_id)]}</strong>
+              </p>
+              <ListArticle onClick={(event) => event.preventDefault()} />
+            </div> : showResult && title === "aneh" && <div className="mt-5"><h1>Not found</h1></div>
+        }
+      </div>
+    </>
+  )
 }
 
 export default SearchArticle;
