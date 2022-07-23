@@ -1,14 +1,12 @@
 import React from "react";
 
-class InputTitle extends React.Component {
-  render() {
-    return (
-      <div className="mb-3">
-        <label htmlFor="titleInput" className="form-label">Title</label>
-        <input type="text" className="form-control" id="titleInput" onChange={this.props.onChange} />
-      </div>
-    )
-  }
+function InputTitle(props) {
+  return (
+    <div className="mb-3">
+      <label htmlFor="titleInput" className="form-label">Title</label>
+      <input type="text" value={props.value || ""} className="form-control" id="titleInput" onChange={props.onChange} />
+    </div>
+  )
 }
 
 export default InputTitle;
